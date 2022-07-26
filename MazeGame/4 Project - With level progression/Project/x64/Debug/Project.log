@@ -1,0 +1,20 @@
+﻿  AudioManager.cpp
+  Door.cpp
+  Enemy.cpp
+  Game.cpp
+  GameplayState.cpp
+  Goal.cpp
+  HighScoreState.cpp
+  Key.cpp
+  Level.cpp
+  LoseState.cpp
+  MainMenuState.cpp
+  Money.cpp
+  PlacableActor.cpp
+  Player.cpp
+  Project.cpp
+  SettingsState.cpp
+  StateMachineExampleGame.cpp
+  WinState.cpp
+  Generating Code...
+  Project.vcxproj -> C:\Users\ajimerson\OneDrive - Activision Publishing\Documents\projects\Coding-Challenges\Week2\MazeGame\4 Project - With level progression\x64\Debug\Project.exe
