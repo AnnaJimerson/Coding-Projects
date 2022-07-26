@@ -9,6 +9,7 @@
 #include "Door.h"
 #include "Goal.h"
 #include "Money.h"
+#include "OwOEnemy.h"
 
 using namespace std;
 
@@ -137,7 +138,7 @@ bool Level::ConvertLevel(int* playerX, int* playerY)
 				break;
 			case 'b':
 				m_pLevelData[index] = ' ';
-				m_pActors.push_back(new Key(x, y, ActorColor::Blue));
+				m_pActors.push_back(new Key(x, y, ActorColor::Yellow));
 				break;
 			case 'R':
 				m_pLevelData[index] = ' ';
@@ -149,7 +150,7 @@ bool Level::ConvertLevel(int* playerX, int* playerY)
 				break;
 			case 'B':
 				m_pLevelData[index] = ' ';
-				m_pActors.push_back(new Door(x, y, ActorColor::Blue, ActorColor::SolidBlue));
+				m_pActors.push_back(new Door(x, y, ActorColor::Blue, ActorColor::Yellow));
 				break;
 			case 'X':
 				m_pLevelData[index] = ' ';
@@ -169,6 +170,10 @@ bool Level::ConvertLevel(int* playerX, int* playerY)
 				break;
 			case 'e':
 				m_pActors.push_back(new Enemy(x, y));
+				m_pLevelData[index] = ' '; // clear the level
+				break;
+			case 'd':
+				m_pActors.push_back(new OwOEnemy(x, y, 4, 4));
 				m_pLevelData[index] = ' '; // clear the level
 				break;
 			case 'h':
