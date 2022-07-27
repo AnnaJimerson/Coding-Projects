@@ -1,31 +1,50 @@
 #pragma once
 #include <vector>
+#include <string>
 #include "../inventory/UsableCommand.h"
 
 class Character
 {
 private:
-	int maxHealth = 90;
-	int maxMana = 90;
+	int m_maxHealth = 90;
+	int m_maxMana = 90;
 
-	int health = maxHealth;
-	int mana = maxMana;
+	int m_health = m_maxHealth;
+	int m_mana = m_maxMana;
 
-	std::vector<UsableCommand*> commands;
-	std::vector<UsableCommand*> inventory;
+	std::string m_name = "Character";
+
+	std::vector<UsableCommand*> m_commands;
+	std::vector<UsableCommand*> m_inventory;
+
+	Character* m_target;
 
 public:
 	//Constructor
-	Character(int in_health, int in_mana, std::vector<UsableCommand*> in_commands, std::vector<UsableCommand*> in_inventory);
+	Character(std::string name, int health, int mana, 
+		std::vector<UsableCommand*> commands, std::vector<UsableCommand*> inventory);
 
-	// Get Functions
-	int getHealth() { return health; }
-	int getMana() { return mana; }
-	std::vector<UsableCommand*>& getCommands () { return commands; }
-	std::vector<UsableCommand*>& getInventory() { return inventory; }
-	
-	//Set Functions
-	void setHealth(int in_health);
-	void setMana(int in_mana);
+	// Destructor
+	virtual ~Character();
+
+	// Health Functions
+	int const GetHealth() const { return m_health; }
+	void SetHealth(int health);
+
+	// Mana Functions
+	int const GetMana() const { return m_mana; }
+	void SetMana(int health);
+
+	// Character Name Functions
+	std::string const GetName() const { return m_name; }
+	void SetName(std::string name);
+
+	// Character Target Functions
+	Character* GetTarget() { return m_target; }
+	void SetTarget(Character* target);
+
+	// Inventory / Command Array functions
+	std::vector<UsableCommand*>& GetCommands () { return m_commands; }
+	std::vector<UsableCommand*>& GetInventory() { return m_inventory; }
 };
 

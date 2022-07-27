@@ -10,26 +10,26 @@ void UsableCommand::OnCommandUsed()
 	//... override this function with UsableCommand subclasses and they do stuff here
 }
 
-void UsableCommand::SetCommandPotency(int in_potency)
+void UsableCommand::SetCommandPotency(int potency)
 {
 	// Set the potency of the UsableCommand
-	this->potency = in_potency;
+	this->m_potency = potency;
 }
 
-void UsableCommand::AddToCommandCount(int in_count_add)
+void UsableCommand::AddToCommandCount(int numberAdded)
 {
 	// Adds the in count amount to the current count of the item
-	commandCount += in_count_add;
+	m_commandCount += numberAdded;
 
 	// IF out of items!!
 	// find the command in the owner character's inventory and erase it (kinda bad but.........)
-	if (commandCount <= 0) {
+	if (m_commandCount <= 0) {
 		// Find in commands list
-		GetOwner()->getCommands().erase
-			(std::find(GetOwner()->getCommands().begin(), GetOwner()->getCommands().end(), this));
+		GetOwner()->GetCommands().erase
+			(std::find(GetOwner()->GetCommands().begin(), GetOwner()->GetCommands().end(), this));
 
 		// Find in inventory list
-		GetOwner()->getInventory().erase
-		(std::find(GetOwner()->getInventory().begin(), GetOwner()->getInventory().end(), this));
+		GetOwner()->GetInventory().erase
+		(std::find(GetOwner()->GetInventory().begin(), GetOwner()->GetInventory().end(), this));
 	}
 }

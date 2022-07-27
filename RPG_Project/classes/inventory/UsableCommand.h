@@ -2,9 +2,9 @@
 class UsableCommand
 {
 private:
-	int potency = 0;
-	class Character* Owner;
-	int commandCount = 1;
+	int m_potency = 0;
+	class Character* m_owner;
+	int m_commandCount = 1;
 
 public:
 	UsableCommand();
@@ -13,14 +13,14 @@ public:
 	virtual void OnCommandUsed();
 
 	// Get Set potency values
-	int GetCommandPotency() { return potency; }
-	void SetCommandPotency(int in_potency);
+	int GetCommandPotency() { return m_potency; }
+	void SetCommandPotency(int potency);
 
 	// Get Owning Character
-	class Character* GetOwner() { return Owner; }
+	class Character* GetOwner() { return m_owner; }
 
 	// Get Set command count values
-	int GetCommandCount() { return potency; }
-	void AddToCommandCount(int in_count_add);
+	int GetCommandCount() { return m_potency; }
+	void AddToCommandCount(int numberAdded);
 };
 

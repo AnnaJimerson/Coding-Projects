@@ -8,5 +8,5 @@ OwOEnemy::OwOEnemy(int x, int y, int deltaX, int deltaY) : Enemy(x, y, deltaX, d
 
 void OwOEnemy::Draw()
 {
-	std::cout << 'D';
+	std::cout << "OwO";
 }

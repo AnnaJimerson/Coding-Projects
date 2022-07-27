@@ -1,17 +1,46 @@
 #include "Character.h"
 
-Character::Character(int in_health, int in_mana, std::vector<Item*> in_commands, std::vector<Item*> in_inventory)
+Character::Character(std::string name, int health, int mana, std::vector<UsableCommand*> commands,
+	std::vector<UsableCommand*> inventory) :
+	  m_name(name)
+	, m_health(health)
+	, m_mana(mana)
+	, m_commands(commands)
+	, m_inventory(inventory)
 {
-	health    = in_health;
-	mana	  = in_mana;
-	commands  = in_commands;
-	inventory = in_inventory;
+
 }
 
-void Character::setHealth(int in_health)
+Character::~Character()
+{
+	// First delete all inventory pointers
+	for (int i = 0; i < m_commands.size(); i++) {
+		if(m_commands[i] != nullptr)
+			delete m_commands[i];
+	}
+	for (int i = 0; i < m_inventory.size(); i++) {
+		if (m_inventory[i] != nullptr)
+			delete m_inventory[i];
+	}
+
+	// Then clear the arrays
+	m_commands.clear();
+	m_inventory.clear();
+}
+
+void Character::SetHealth(int health)
 {
 }
 
-void Character::setMana(int in_mana)
+void Character::SetMana(int mana)
 {
+}
+
+void Character::SetName(std::string name)
+{
+}
+
+void Character::SetTarget(Character* target)
+{
+	m_target = target;
 }
