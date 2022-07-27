@@ -33,6 +33,9 @@
     <ClCompile Include="classes\inventory\UsableCommand.cpp">
       <Filter>Source Files\classes</Filter>
     </ClCompile>
+    <ClCompile Include="classes\inventory\Attack_Com.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="classes\characters\Character.h">
@@ -45,6 +48,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="classes\characters\Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="classes\inventory\Attack_Com.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

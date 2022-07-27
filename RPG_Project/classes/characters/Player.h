@@ -6,6 +6,6 @@ class Player :
 private:
 
 public:
-    Player(int in_health, int in_mana, std::vector<Item*> in_commands, std::vector<Item*> in_inventory);
+    Player(std::string name, int health, int mana);
 };
 

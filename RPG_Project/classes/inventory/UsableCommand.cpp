@@ -1,19 +1,54 @@
 #include "UsableCommand.h"
 #include "../characters/Character.h"
+#include <iostream>
 
 UsableCommand::UsableCommand()
 {
 }
 
-void UsableCommand::OnCommandUsed()
+void UsableCommand::SetCommandName(std::string commandName)
 {
-	//... override this function with UsableCommand subclasses and they do stuff here
+}
+
+bool UsableCommand::OnCommandUsed()
+{
+	// Check if owner exists
+	if (!GetOwner()) {
+		std::cout << "NO VALID OWNER!!";
+		return false;
+	}
+
+	// Then check if their target exists
+	if (GetOwner()->GetTarget() == nullptr) {
+		std::cout << "NO VALID TARGET!!";
+		return false;
+	}
+
+	return true;
+}
+
+bool UsableCommand::OnCommandEquipped()
+{
+	// Check if owner exists
+	if (!GetOwner()) {
+		std::cout << "NO VALID OWNER!!";
+		return false;
+	}
+
+	// Successfully equipped
+	std::cout << GetCommandName() << " successfully equipped!!";
+	return true;
 }
 
 void UsableCommand::SetCommandPotency(int potency)
 {
 	// Set the potency of the UsableCommand
 	this->m_potency = potency;
+}
+
+void UsableCommand::SetIsEquippable(bool isEquippable)
+{
+	m_isEquippable = isEquippable;
 }
 
 void UsableCommand::AddToCommandCount(int numberAdded)

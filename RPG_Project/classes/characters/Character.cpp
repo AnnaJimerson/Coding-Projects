@@ -1,12 +1,9 @@
 #include "Character.h"
 
-Character::Character(std::string name, int health, int mana, std::vector<UsableCommand*> commands,
-	std::vector<UsableCommand*> inventory) :
+Character::Character(std::string name, int health, int mana) :
 	  m_name(name)
 	, m_health(health)
 	, m_mana(mana)
-	, m_commands(commands)
-	, m_inventory(inventory)
 {
 
 }
@@ -28,19 +25,25 @@ Character::~Character()
 	m_inventory.clear();
 }
 
-void Character::SetHealth(int health)
-{
-}
+void Character::SetHealth(int health) 
+{ m_health = health; }
 
-void Character::SetMana(int mana)
-{
-}
+void Character::SetMana(int mana) 
+{ m_mana = mana; }
 
-void Character::SetName(std::string name)
-{
-}
+void Character::SetName(std::string name) 
+{ m_name = name; }
 
-void Character::SetTarget(Character* target)
+void Character::SetAttackBonus(int attackBns)
+{ m_attackBns = attackBns; }
+
+void Character::SetDefenseBonus(int defenseBns)
+{ m_defenseBns = defenseBns; }
+
+void Character::SetTarget(Character* target) 
+{ m_target = target; }
+
+void Character::OnCharacterTurnEvent()
 {
-	m_target = target;
+	// ...override this in all characters
 }

@@ -8,9 +8,10 @@ HPotion_ComItem::HPotion_ComItem()
 	SetCommandPotency(25);
 }
 
-void HPotion_ComItem::OnCommandUsed()
+bool HPotion_ComItem::OnCommandUsed()
 {
-	if (!GetOwner()) return;
+	// Call parent function first
+	if (UsableCommand::OnCommandUsed() == false) return false;
 	
 	// Print what the command is doing
 	std::cout << GetOwner()->GetName() << " used a healing potion to restore " <<
@@ -18,6 +19,8 @@ void HPotion_ComItem::OnCommandUsed()
 
 	// Restore the health
 	GetOwner()->SetHealth(GetOwner()->GetHealth() + 25);
+
+	return true;
 }
 
 

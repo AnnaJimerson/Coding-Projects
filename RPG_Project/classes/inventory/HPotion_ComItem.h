@@ -8,6 +8,6 @@ private:
 
 public:
 	HPotion_ComItem();
-	virtual void OnCommandUsed() override;
+	virtual bool OnCommandUsed() override;
 };
 

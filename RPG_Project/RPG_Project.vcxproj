@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="classes\characters\Character.cpp" />
     <ClCompile Include="classes\characters\Player.cpp" />
+    <ClCompile Include="classes\inventory\Attack_Com.cpp" />
     <ClCompile Include="classes\inventory\HPotion_ComItem.cpp" />
     <ClCompile Include="classes\inventory\UsableCommand.cpp" />
     <ClCompile Include="RPG_Project.cpp" />
@@ -136,6 +137,7 @@
   <ItemGroup>
     <ClInclude Include="classes\characters\Character.h" />
     <ClInclude Include="classes\characters\Player.h" />
+    <ClInclude Include="classes\inventory\Attack_Com.h" />
     <ClInclude Include="classes\inventory\HPotion_ComItem.h" />
     <ClInclude Include="classes\inventory\UsableCommand.h" />
   </ItemGroup>
