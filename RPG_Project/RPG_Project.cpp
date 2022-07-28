@@ -2,8 +2,16 @@
 //
 
 #include <iostream>
+#include "vld.h"
+#include "classes/characters/Character.h"
 
 int main()
 {
-    std::cout << 1.f / 2.f;
+    // Set random seed
+    srand(time(0));
+
+    // Spawn Characters
+    Character* myChar = new Character("Hero", 90, 90);
+
+    delete myChar;
 }

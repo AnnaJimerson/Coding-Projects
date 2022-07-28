@@ -24,7 +24,7 @@ private:
 
 public:
 	//Constructor
-	Character(std::string name, int health, int mana);
+	Character(std::string name = "Char", int health = 10, int mana = 10);
 
 	// Destructor
 	virtual ~Character();
@@ -52,7 +52,8 @@ public:
 	void SetTarget(Character* target);
 
 	// Event Functions
-	virtual void OnCharacterTurnEvent();
+	virtual void CharacterTurnEvent();
+	virtual void TakeDamage(int damage);
 
 	// Inventory / Command Array functions
 	std::vector<UsableCommand*>& GetCommands () { return m_commands; }

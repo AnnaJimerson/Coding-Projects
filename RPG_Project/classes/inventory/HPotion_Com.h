@@ -1,13 +1,13 @@
 #pragma once
 #include "UsableCommand.h"
 
-class HPotion_ComItem : 
+class HPotion_Com : 
 	public UsableCommand
 {
 private:
 
 public:
-	HPotion_ComItem();
-	virtual bool OnCommandUsed() override;
+	HPotion_Com();
+	virtual bool ExecuteCommand() override;
 };
 

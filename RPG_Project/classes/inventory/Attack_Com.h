@@ -8,6 +8,6 @@ private:
 
 public:
     Attack_Com();
-    virtual bool OnCommandUsed() override;
+    virtual bool ExecuteCommand() override;
 };
 

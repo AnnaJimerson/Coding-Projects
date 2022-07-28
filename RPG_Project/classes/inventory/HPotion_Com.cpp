@@ -1,17 +1,16 @@
-#include "HPotion_ComItem.h"
+#include "HPotion_Com.h"
 #include "../characters/Character.h"
-#include <iostream>
 
-HPotion_ComItem::HPotion_ComItem()
+HPotion_Com::HPotion_Com()
 {
 	// Set the strength of the potion (amt. of hp to restore)
 	SetCommandPotency(25);
 }
 
-bool HPotion_ComItem::OnCommandUsed()
+bool HPotion_Com::ExecuteCommand()
 {
 	// Call parent function first
-	if (UsableCommand::OnCommandUsed() == false) return false;
+	if (UsableCommand::ExecuteCommand() == false) return false;
 	
 	// Print what the command is doing
 	std::cout << GetOwner()->GetName() << " used a healing potion to restore " <<

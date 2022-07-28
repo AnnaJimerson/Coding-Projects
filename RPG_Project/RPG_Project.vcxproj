@@ -70,6 +70,9 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>C:\Program Files %28x86%29\Visual Leak Detector\include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -104,10 +107,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalUsingDirectories>C:\Program Files %28x86%29\Visual Leak Detector\include;%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateDebugInformation>DebugFull</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Program Files %28x86%29\Visual Leak Detector\lib\Win64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -128,17 +133,21 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="classes\characters\Character.cpp" />
+    <ClCompile Include="classes\characters\Enemy.cpp" />
     <ClCompile Include="classes\characters\Player.cpp" />
     <ClCompile Include="classes\inventory\Attack_Com.cpp" />
-    <ClCompile Include="classes\inventory\HPotion_ComItem.cpp" />
+    <ClCompile Include="classes\inventory\HPotion_Com.cpp" />
     <ClCompile Include="classes\inventory\UsableCommand.cpp" />
     <ClCompile Include="RPG_Project.cpp" />
+    <ClCompile Include="Slime_enm.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="classes\characters\Character.h" />
+    <ClInclude Include="classes\characters\Enemy.h" />
     <ClInclude Include="classes\characters\Player.h" />
+    <ClInclude Include="classes\characters\Slime_enm.h" />
     <ClInclude Include="classes\inventory\Attack_Com.h" />
-    <ClInclude Include="classes\inventory\HPotion_ComItem.h" />
+    <ClInclude Include="classes\inventory\HPotion_Com.h" />
     <ClInclude Include="classes\inventory\UsableCommand.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

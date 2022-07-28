@@ -1,4 +1,5 @@
 #include "Character.h"
+#include <algorithm>
 
 Character::Character(std::string name, int health, int mana) :
 	  m_name(name)
@@ -26,7 +27,12 @@ Character::~Character()
 }
 
 void Character::SetHealth(int health) 
-{ m_health = health; }
+{ 
+	m_health = health;
+
+	// Don't allow hp to go over max health
+	m_health = std::min(m_health, m_maxHealth);
+}
 
 void Character::SetMana(int mana) 
 { m_mana = mana; }
@@ -43,7 +49,20 @@ void Character::SetDefenseBonus(int defenseBns)
 void Character::SetTarget(Character* target) 
 { m_target = target; }
 
-void Character::OnCharacterTurnEvent()
+void Character::CharacterTurnEvent()
 {
 	// ...override this in all characters
+}
+
+void Character::TakeDamage(int damage)
+{
+	// Calculate critical hits
+	if (rand() % 10 == 0) {
+		damage *= 2;
+		std::cout << "~CRITICAL!!~" << std::endl;
+		std::cout << "*<" << damage << ">*" << std::endl;
+	};
+
+	// Deal damage to this character...
+	SetHealth(GetHealth() - damage);
 }

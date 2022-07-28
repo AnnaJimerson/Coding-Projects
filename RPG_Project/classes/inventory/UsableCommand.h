@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <iostream>
 
 class UsableCommand
 {
@@ -33,7 +34,7 @@ public:
 	void SetCommandName(std::string commandName);
 
 	// Command Event Functions
-	virtual bool OnCommandUsed();
+	virtual bool ExecuteCommand();
 	virtual bool OnCommandEquipped();
 };
 

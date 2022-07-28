@@ -27,7 +27,7 @@
     <ClCompile Include="classes\characters\Player.cpp">
       <Filter>Source Files\classes</Filter>
     </ClCompile>
-    <ClCompile Include="classes\inventory\HPotion_ComItem.cpp">
+    <ClCompile Include="classes\inventory\HPotion_Com.cpp">
       <Filter>Source Files\classes</Filter>
     </ClCompile>
     <ClCompile Include="classes\inventory\UsableCommand.cpp">
@@ -36,12 +36,18 @@
     <ClCompile Include="classes\inventory\Attack_Com.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="classes\characters\Enemy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Slime_enm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="classes\characters\Character.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="classes\inventory\HPotion_ComItem.h">
+    <ClInclude Include="classes\inventory\HPotion_Com.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="classes\inventory\UsableCommand.h">
@@ -51,6 +57,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="classes\inventory\Attack_Com.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="classes\characters\Enemy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="classes\characters\Slime_enm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

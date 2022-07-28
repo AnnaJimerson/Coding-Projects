@@ -1,6 +1,5 @@
 #include "UsableCommand.h"
 #include "../characters/Character.h"
-#include <iostream>
 
 UsableCommand::UsableCommand()
 {
@@ -10,7 +9,7 @@ void UsableCommand::SetCommandName(std::string commandName)
 {
 }
 
-bool UsableCommand::OnCommandUsed()
+bool UsableCommand::ExecuteCommand()
 {
 	// Check if owner exists
 	if (!GetOwner()) {
