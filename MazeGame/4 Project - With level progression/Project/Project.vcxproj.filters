@@ -69,7 +69,7 @@
     <ClCompile Include="HighScoreState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="OwOEnemy.cpp">
+    <ClCompile Include="OwOFollower.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -137,7 +137,7 @@
     <ClInclude Include="Utility.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="OwOEnemy.h">
+    <ClInclude Include="OwOFollower.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

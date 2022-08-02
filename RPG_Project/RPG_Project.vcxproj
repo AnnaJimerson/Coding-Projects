@@ -135,11 +135,11 @@
     <ClCompile Include="classes\characters\Character.cpp" />
     <ClCompile Include="classes\characters\Enemy.cpp" />
     <ClCompile Include="classes\characters\Player.cpp" />
+    <ClCompile Include="classes\characters\Slime_enm.cpp" />
     <ClCompile Include="classes\inventory\Attack_Com.cpp" />
     <ClCompile Include="classes\inventory\HPotion_Com.cpp" />
     <ClCompile Include="classes\inventory\UsableCommand.cpp" />
     <ClCompile Include="RPG_Project.cpp" />
-    <ClCompile Include="Slime_enm.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="classes\characters\Character.h" />

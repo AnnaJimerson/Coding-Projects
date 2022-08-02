@@ -4,9 +4,11 @@ class Enemy :
     public Character
 {
 private:
+
+public:
     //Constructor
     Enemy(std::string name, int health, int mana);
-public:
+
     // Event Functions
     virtual void CharacterTurnEvent();
 };

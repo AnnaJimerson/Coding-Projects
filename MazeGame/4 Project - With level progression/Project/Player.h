@@ -1,5 +1,6 @@
 #pragma once
 #include "PlacableActor.h"
+#include <vector>
 
 class Key;
 
@@ -23,8 +24,18 @@ public:
 
 	virtual ActorType GetType() override { return ActorType::Player; }
 	virtual void Draw() override;
+
+	// Added follower mechanic (to shoot them at enemies)
+	std::vector<class OwOFollower*>& GetFollowers() { return followers; }
+	void UpdateFollowers();
+	void DropFollower();
+
+	int prevX = 0;
+	int prevY = 0;
+
 private:
 	Key* m_pCurrentKey;
 	int m_money;
 	int m_lives;
+	std::vector<class OwOFollower*> followers;
 };

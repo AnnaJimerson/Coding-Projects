@@ -9,7 +9,7 @@
 #include "Door.h"
 #include "Goal.h"
 #include "Money.h"
-#include "OwOEnemy.h"
+#include "OwOFollower.h"
 
 using namespace std;
 
@@ -173,8 +173,9 @@ bool Level::ConvertLevel(int* playerX, int* playerY)
 				m_pLevelData[index] = ' '; // clear the level
 				break;
 			case 'd':
-				m_pActors.push_back(new OwOEnemy(x, y, 4, 4));
+				m_pActors.push_back(new OwOFollower(x, y));
 				m_pLevelData[index] = ' '; // clear the level
+				m_neededFollowers++;
 				break;
 			case 'h':
 				m_pActors.push_back(new Enemy(x, y, 3, 0));

@@ -13,6 +13,7 @@
 #include "AudioManager.h"
 #include "Utility.h"
 #include "StateMachineExampleGame.h"
+#include "OwOFollower.h"
 
 using namespace std;
 
@@ -103,6 +104,10 @@ bool GameplayState::Update(bool processInput)
 		{
 			m_player.DropKey();
 		}
+		else if ((char)input == 'X' || (char)input == 'x')
+		{
+			m_player.DropFollower();
+		}
 
 		// If position never changed
 		if (newPlayerX == m_player.GetXPosition() && newPlayerY == m_player.GetYPosition())
@@ -149,6 +154,17 @@ void GameplayState::HandleCollision(int newPlayerX, int newPlayerY)
 	{
 		switch (collidedActor->GetType())
 		{
+		case ActorType::OwOFollower:
+		{
+			OwOFollower* collidedOwO = dynamic_cast<OwOFollower*>(collidedActor);
+			assert(collidedOwO);
+			AudioManager::GetInstance()->PlayKeyDropSound();
+			m_player.SetPosition(newPlayerX, newPlayerY);
+			if (collidedOwO->FollowPlayer()) {
+				m_player.GetFollowers().push_back(collidedOwO);
+			}
+			break;
+		}
 		case ActorType::Enemy:
 		{
 			Enemy* collidedEnemy = dynamic_cast<Enemy*>(collidedActor);
@@ -216,9 +232,11 @@ void GameplayState::HandleCollision(int newPlayerX, int newPlayerY)
 		}
 		case ActorType::Goal:
 		{
+			if (m_player.GetFollowers().size() < m_pLevel->GetNeededFollowers()) return;
 			Goal* collidedGoal = dynamic_cast<Goal*>(collidedActor);
 			assert(collidedGoal);
 			collidedGoal->Remove();
+			m_player.GetFollowers().clear();
 			m_player.SetPosition(newPlayerX, newPlayerY);
 			m_beatLevel = true;
 			break;
@@ -229,6 +247,7 @@ void GameplayState::HandleCollision(int newPlayerX, int newPlayerY)
 	}
 	else if (m_pLevel->IsSpace(newPlayerX, newPlayerY)) // no collision
 	{
+		m_player.UpdateFollowers();
 		m_player.SetPosition(newPlayerX, newPlayerY);
 	}
 	else if (m_pLevel->IsWall(newPlayerX, newPlayerY))

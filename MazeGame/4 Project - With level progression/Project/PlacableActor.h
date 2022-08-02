@@ -21,7 +21,7 @@ enum class ActorType
 	Key,
 	Money,
 	Player,
-	OwOEnemy
+	OwOFollower
 };
 
 class PlacableActor

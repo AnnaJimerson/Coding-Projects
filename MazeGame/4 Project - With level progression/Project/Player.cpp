@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "Key.h"
 #include "AudioManager.h"
+#include "OwOFollower.h"
 
 using namespace std;
 
@@ -54,4 +55,31 @@ void Player::DropKey()
 void Player::Draw()
 {
 	cout << "@";
+}
+
+void Player::UpdateFollowers() {
+	// First store previous coords
+	prevX = GetXPosition();
+	prevY = GetYPosition();
+	int prev2X = 0;
+	int prev2Y = 0;
+
+	// Update each follower's position based on previous coordinates
+	for (int i = 0; i < followers.size(); i++) {
+
+		if (followers[i]->IsFollowerPlaced()) continue;
+
+		prev2X = followers[i]->GetXPosition();
+		prev2Y = followers[i]->GetYPosition();
+
+		followers[i]->SetPosition(prevX, prevY);
+
+		prevX = prev2X;
+		prevY = prev2Y;
+	}
+}
+
+void Player::DropFollower()
+{
+	followers[0]->PlaceFollower();
 }

@@ -39,7 +39,7 @@
     <ClCompile Include="classes\characters\Enemy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Slime_enm.cpp">
+    <ClCompile Include="classes\characters\Slime_enm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
