@@ -33,5 +33,6 @@ public:
 	virtual void ChangeState(GameState* pNewState) override;
 	void LoadScene(SceneName scene);
 	virtual bool Cleanup() override;
+	Game* GetOwner() { return m_pOwner; }
 };
 

@@ -64,10 +64,8 @@ void Player::UpdateFollowers() {
 	int prev2X = 0;
 	int prev2Y = 0;
 
-	// Update each follower's position based on previous coordinates
+	// Update each follower's position based on previous coordinates (snake-effect)
 	for (int i = 0; i < followers.size(); i++) {
-
-		if (followers[i]->IsFollowerPlaced()) continue;
 
 		prev2X = followers[i]->GetXPosition();
 		prev2Y = followers[i]->GetYPosition();
@@ -81,5 +79,6 @@ void Player::UpdateFollowers() {
 
 void Player::DropFollower()
 {
-	followers[0]->PlaceFollower();
+	followers[followers.size()-1]->PlaceFollower();
+	followers.pop_back();
 }

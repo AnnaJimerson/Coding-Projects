@@ -1,4 +1,6 @@
 #include "Game.h"
+#include "InputHandler.h"
+#include <thread>
 
 Game::Game()
 	: m_pStateMachine(nullptr)
@@ -13,22 +15,51 @@ void Game::Initialize(GameStateMachine* pStateMachine)
 		pStateMachine->Init();
 		m_pStateMachine = pStateMachine;
 	}
+
+	// Create our input handler
+	m_Input = new InputHandler();
+}
+
+void Game::RunInputLoop()
+{
+	while (isRunning)
+	{
+		m_Input->GetPlayerInput();
+	}
 }
 
 void Game::RunGameLoop()
 {
 	bool isGameOver = false;
 
+	int deltaFrameTime = 0;
+	int deltaFrameMax = 99999999;
+	int count = 0;
+
+	std::thread InputThread(&Game::RunInputLoop, this);
+
 	while (!isGameOver)
 	{
-		// update with no input
-		Update(false);
-		// Draw
-		Draw();
-		// Update with input
-		isGameOver = Update();
+		// Slow down frame update
+		if (deltaFrameTime == deltaFrameMax)
+		{
+			// update with no input
+			Update(false);
+			// Draw
+			Draw();
+			// Update with input
+			isGameOver = Update();
+			count++;
+		}
+
+		deltaFrameTime < deltaFrameMax ? deltaFrameTime++ : deltaFrameTime = 0;
+
+		isRunning = true;
 	}
 
+	isRunning = false;
+
+	InputThread.join();
 	Draw();
 }
 
@@ -36,6 +67,10 @@ void Game::Deinitialize()
 {
 	if (m_pStateMachine != nullptr)
 		m_pStateMachine->Cleanup();
+
+	// delete input handler
+	if (m_Input != nullptr)
+		delete m_Input;
 }
 
 bool Game::Update(bool processInput)

@@ -24,6 +24,9 @@ class GameplayState : public GameState
 
 	std::vector<std::string> m_LevelNames;
 
+	int m_playerX;
+	int m_playerY;
+
 public:
 	GameplayState(StateMachineExampleGame* pOwner);
 	~GameplayState();
@@ -31,6 +34,14 @@ public:
 	virtual void Enter() override;
 	virtual bool Update(bool processInput = true) override;
 	virtual void Draw() override;
+
+	Player& GetPlayer() { return m_player; }
+	int GetPlayerX() { return m_playerX; }
+	int GetPlayerY() { return m_playerY; }
+	int SetPlayerX(int playerX);
+	int SetPlayerY(int playerY);
+	StateMachineExampleGame* GetStateOwner() { return m_pOwner; }
+	bool GetBeatLevel() { return m_beatLevel; }
 
 private:
 	void HandleCollision(int newPlayerX, int newPlayerY);

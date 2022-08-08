@@ -14,15 +14,10 @@
 #include "Utility.h"
 #include "StateMachineExampleGame.h"
 #include "OwOFollower.h"
+#include "Game.h"
+#include "InputHandler.h"
 
 using namespace std;
-
-constexpr int kArrowInput = 224;
-constexpr int kLeftArrow = 75;
-constexpr int kRightArrow = 77;
-constexpr int kUpArrow = 72;
-constexpr int kDownArrow = 80;
-constexpr int kEscapeKey = 27;
 
 GameplayState::GameplayState(StateMachineExampleGame* pOwner)
 	: m_pOwner(pOwner)
@@ -34,6 +29,9 @@ GameplayState::GameplayState(StateMachineExampleGame* pOwner)
 	m_LevelNames.push_back("Level1.txt");
 	m_LevelNames.push_back("Level2.txt");
 	m_LevelNames.push_back("Level3.txt");
+
+	// Get the input handler from Game class, and set its game state to this
+	m_pOwner->GetOwner()->GetInputHandle()->SetGameState(this);
 }
 
 GameplayState::~GameplayState()
@@ -59,66 +57,17 @@ bool GameplayState::Load()
 void GameplayState::Enter()
 {
 	Load();
+
+	// Once loaded level, set player's initial position
+	m_playerX = GetPlayer().GetXPosition();
+	m_playerY = GetPlayer().GetYPosition();
 }
 
 bool GameplayState::Update(bool processInput)
 {
-	if (processInput && !m_beatLevel)
-	{
-		int input = _getch();
-		int arrowInput = 0;
-		int newPlayerX = m_player.GetXPosition();
-		int newPlayerY = m_player.GetYPosition();
+	m_player.SetPosition(m_playerX, m_playerY);
+	HandleCollision(m_playerX, m_playerY);
 
-		// One of the arrow keys were pressed
-		if (input == kArrowInput)
-		{
-			arrowInput = _getch();
-		}
-
-		if ((input == kArrowInput && arrowInput == kLeftArrow) ||
-			(char)input == 'A' || (char)input == 'a')
-		{
-			newPlayerX--;
-		}
-		else if ((input == kArrowInput && arrowInput == kRightArrow) ||
-			(char)input == 'D' || (char)input == 'd')
-		{
-			newPlayerX++;
-		}
-		else if ((input == kArrowInput && arrowInput == kUpArrow) ||
-			(char)input == 'W' || (char)input == 'w')
-		{
-			newPlayerY--;
-		}
-		else if ((input == kArrowInput && arrowInput == kDownArrow) ||
-			(char)input == 'S' || (char)input == 's')
-		{
-			newPlayerY++;
-		}
-		else if (input == kEscapeKey)
-		{
-			m_pOwner->LoadScene(StateMachineExampleGame::SceneName::MainMenu);
-		}
-		else if ((char)input == 'Z' || (char)input == 'z')
-		{
-			m_player.DropKey();
-		}
-		else if ((char)input == 'X' || (char)input == 'x')
-		{
-			m_player.DropFollower();
-		}
-
-		// If position never changed
-		if (newPlayerX == m_player.GetXPosition() && newPlayerY == m_player.GetYPosition())
-		{
-			//return false;
-		}
-		else
-		{
-			HandleCollision(newPlayerX, newPlayerY);
-		}
-	}
 	if (m_beatLevel)
 	{
 		++m_skipFrameCount;
@@ -157,10 +106,11 @@ void GameplayState::HandleCollision(int newPlayerX, int newPlayerY)
 		case ActorType::OwOFollower:
 		{
 			OwOFollower* collidedOwO = dynamic_cast<OwOFollower*>(collidedActor);
-			assert(collidedOwO);
-			AudioManager::GetInstance()->PlayKeyDropSound();
-			m_player.SetPosition(newPlayerX, newPlayerY);
+
 			if (collidedOwO->FollowPlayer()) {
+				assert(collidedOwO);
+				AudioManager::GetInstance()->PlayKeyDropSound();
+				m_player.SetPosition(newPlayerX, newPlayerY);
 				m_player.GetFollowers().push_back(collidedOwO);
 			}
 			break;
@@ -277,6 +227,18 @@ void GameplayState::Draw()
 	SetConsoleCursorPosition(console, currentCursorPosition);
 
 	DrawHUD(console);
+}
+
+int GameplayState::SetPlayerX(int playerX)
+{
+	m_playerX = playerX;
+	return m_playerX;
+}
+
+int GameplayState::SetPlayerY(int playerY)
+{
+	m_playerY = playerY;
+	return m_playerY;
 }
 
 void GameplayState::DrawHUD(const HANDLE& console)

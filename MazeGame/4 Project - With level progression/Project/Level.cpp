@@ -78,16 +78,21 @@ void Level::Draw()
 	HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(console, (int)ActorColor::Regular);
 
+	// Create string to store level info into, in order to reduce flicker
+	string printLevel;
+
 	// Draw the Level
 	for (int y = 0; y < GetHeight(); ++y)
 	{
 		for (int x = 0; x < GetWidth(); ++x)
 		{
 			int indexToPrint = GetIndexFromCoordinates(x, y);
-			cout << m_pLevelData[indexToPrint];
+			printLevel += m_pLevelData[indexToPrint];
 		}
-		cout << endl;
+		printLevel += '\n';
 	}
+
+	cout << printLevel;
 
 	COORD actorCursorPosition;
 
