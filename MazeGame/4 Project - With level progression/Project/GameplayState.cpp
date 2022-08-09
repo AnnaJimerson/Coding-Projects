@@ -65,6 +65,10 @@ void GameplayState::Enter()
 
 bool GameplayState::Update(bool processInput)
 {
+
+	//if(m_playerMoved)
+		//m_player.SetPreviousPosition(m_player.GetXPosition(), m_player.GetYPosition());
+
 	m_player.SetPosition(m_playerX, m_playerY);
 	HandleCollision(m_playerX, m_playerY);
 
@@ -83,6 +87,9 @@ bool GameplayState::Update(bool processInput)
 				AudioManager::GetInstance()->PlayWinSound();
 				
 				m_pOwner->LoadScene(StateMachineExampleGame::SceneName::Win);
+
+				// Stop input from infinite looping (need a better way to handle this)
+				m_pOwner->GetOwner()->GetInputHandle()->SetGameState(nullptr);
 			}
 			else
 			{
@@ -93,7 +100,14 @@ bool GameplayState::Update(bool processInput)
 		}
 	}
 
+	m_playerMoved = false;
+
 	return false;
+}
+
+void GameplayState::SetPlayerMoved(bool moved)
+{
+	m_playerMoved = moved;
 }
 
 void GameplayState::HandleCollision(int newPlayerX, int newPlayerY)
@@ -129,6 +143,9 @@ void GameplayState::HandleCollision(int newPlayerX, int newPlayerY)
 				//TODO: Go to game over screen
 				AudioManager::GetInstance()->PlayLoseSound();
 				m_pOwner->LoadScene(StateMachineExampleGame::SceneName::Lose);
+
+				// Stop input from infinite looping (need a better way to handle this)
+				m_pOwner->GetOwner()->GetInputHandle()->SetGameState(nullptr);
 			}
 			break;
 		}

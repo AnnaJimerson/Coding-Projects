@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "AudioManager.h"
 #include "StateMachineExampleGame.h"
+#include "vld.h"
 
 using namespace std;
 

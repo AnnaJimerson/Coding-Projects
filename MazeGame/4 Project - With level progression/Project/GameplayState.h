@@ -27,6 +27,8 @@ class GameplayState : public GameState
 	int m_playerX;
 	int m_playerY;
 
+	bool m_playerMoved = false;
+
 public:
 	GameplayState(StateMachineExampleGame* pOwner);
 	~GameplayState();
@@ -42,6 +44,9 @@ public:
 	int SetPlayerY(int playerY);
 	StateMachineExampleGame* GetStateOwner() { return m_pOwner; }
 	bool GetBeatLevel() { return m_beatLevel; }
+
+	bool GetPlayerMoved() { return m_playerMoved; }
+	void SetPlayerMoved(bool moved);
 
 private:
 	void HandleCollision(int newPlayerX, int newPlayerY);

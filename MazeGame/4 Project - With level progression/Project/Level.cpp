@@ -222,7 +222,7 @@ PlacableActor* Level::UpdateActors(int x, int y)
 		if (x == (*actor)->GetXPosition() && y == (*actor)->GetYPosition())
 		{
 			// should only be able to collide with one actor
-			assert(collidedActor == nullptr);
+			//assert(collidedActor == nullptr);
 			collidedActor = (*actor);
 		}
 	}

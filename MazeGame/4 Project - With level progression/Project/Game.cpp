@@ -22,7 +22,7 @@ void Game::Initialize(GameStateMachine* pStateMachine)
 
 void Game::RunInputLoop()
 {
-	while (isRunning)
+	while (m_isRunningInput)
 	{
 		m_Input->GetPlayerInput();
 	}
@@ -34,12 +34,13 @@ void Game::RunGameLoop()
 
 	int deltaFrameTime = 0;
 	int deltaFrameMax = 99999999;
-	int count = 0;
 
 	std::thread InputThread(&Game::RunInputLoop, this);
 
 	while (!isGameOver)
 	{
+		m_isRunningInput = true;
+
 		// Slow down frame update
 		if (deltaFrameTime == deltaFrameMax)
 		{
@@ -49,17 +50,15 @@ void Game::RunGameLoop()
 			Draw();
 			// Update with input
 			isGameOver = Update();
-			count++;
+
 		}
 
 		deltaFrameTime < deltaFrameMax ? deltaFrameTime++ : deltaFrameTime = 0;
-
-		isRunning = true;
 	}
 
-	isRunning = false;
-
+	m_isRunningInput = false;
 	InputThread.join();
+
 	Draw();
 }
 

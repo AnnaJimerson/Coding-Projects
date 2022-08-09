@@ -15,7 +15,6 @@ Player::Player()
 	, m_money(0)
 	, m_lives(kStartingNumberOfLives)
 {
-
 }
 
 bool Player::HasKey()
@@ -59,8 +58,8 @@ void Player::Draw()
 
 void Player::UpdateFollowers() {
 	// First store previous coords
-	prevX = GetXPosition();
-	prevY = GetYPosition();
+	int prevX = GetXPosition();
+	int prevY = GetYPosition();
 	int prev2X = 0;
 	int prev2Y = 0;
 
@@ -79,6 +78,18 @@ void Player::UpdateFollowers() {
 
 void Player::DropFollower()
 {
-	followers[followers.size()-1]->PlaceFollower();
-	followers.pop_back();
+	int index = followers.size() - 1;
+
+	// If the follower in the list is an OwO follower, then allow us to drop it
+	if (followers[index]->GetType() == ActorType::OwOFollower) {
+		OwOFollower* drop = dynamic_cast<OwOFollower*>(followers[index]);
+		drop->PlaceFollower();
+		followers.pop_back();
+	}
+}
+
+void Player::SetPreviousPosition(int x, int y)
+{
+	m_prevX = x;
+	m_prevY = y;
 }

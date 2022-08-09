@@ -26,16 +26,21 @@ public:
 	virtual void Draw() override;
 
 	// Added follower mechanic (to shoot them at enemies)
-	std::vector<class OwOFollower*>& GetFollowers() { return followers; }
+	std::vector<class PlacableActor*>& GetFollowers() { return followers; }
 	void UpdateFollowers();
 	void DropFollower();
 
-	int prevX = 0;
-	int prevY = 0;
+	void SetPreviousPosition(int x, int y);
+
+	int GetPrevX() { return m_prevX; }
+	int GetPrevY() { return m_prevY; }
 
 private:
 	Key* m_pCurrentKey;
 	int m_money;
 	int m_lives;
-	std::vector<class OwOFollower*> followers;
+	std::vector<class PlacableActor*> followers;
+
+	int m_prevX = 0;
+	int m_prevY = 0;
 };

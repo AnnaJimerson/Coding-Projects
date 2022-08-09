@@ -15,7 +15,7 @@ public:
 
 	class InputHandler* GetInputHandle() { return m_Input; }
 
-	bool isRunning = false;
+	bool m_isRunningInput = false;
 
 private:
 	bool Update(bool processInput = true);
